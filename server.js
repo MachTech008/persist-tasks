@@ -33,7 +33,7 @@ var Schema = new mongoose.Schema({
 
 var Tasks = mongoose.model('Tasks', Schema);
 
-mongoose.connect('mongodb://lylyn:accenture1@ds151917.mlab.com:51917/persist-tasks', function (error) {
+mongoose.connect(process.env.MONGOLAB_URI, function (error) {
  if (error) {
   console.error(error);
  } else {
