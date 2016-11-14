@@ -13,6 +13,7 @@ var express  = require('express'),
     }),
 
     Todo = mongoose.model('Todo', Schema);
+
 /*
  * I’m sharing my credential here.
  * Feel free to use it while you’re learning.
@@ -22,7 +23,7 @@ var express  = require('express'),
  * MONGOLAB_URI=mongodb://example:example@ds053312.mongolab.com:53312/todolist
  * 'mongodb://example:example@ds053312.mongolab.com:53312/todolist'
  */
-mongoose.connect("process.env.MONGOLAB_URI", function (error) {
+mongoose.connect(process.env.MONGOLAB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
 });
