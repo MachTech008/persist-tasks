@@ -4,6 +4,9 @@
 var express  = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var dotenv = require('dotenv');
+
+dotenv.load();
 
 mongoose.connect(process.env.MONGOLAB_URI, function (error) {
     if (error) console.error(error);
