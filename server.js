@@ -6,28 +6,15 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-
-express()
-  // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
-  .use(bodyParser.json()) // support json encoded bodies
-  .use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
-  .use(express.static(__dirname + '/'))
-  .listen(process.env.PORT || 5000);
-
-// var Schema = new mongoose.Schema({
-//     guid: String,
-//     title: String,
-//     username: String,
-//     priority: String,
-//     status: String,
-//     description: String,
-//     location: String,
-//     beaconId: String,
-// })
-
-// var Tasks = mongoose.model('Tasks', Schema);
-
 var uri = process.env.MONGODB_URI || 'mongodb://lylyn:accenture1@ds151917.mlab.com:51917/persist-tasks';
+
+var Schema = new mongoose.Schema({
+  id: String,
+  title: String,
+  deleted: Boolean
+});
+
+var Tasks = mongoose.model('Tasks', Schema);
 
 mongoose.connect(uri, function (error) {
  if (error) {
@@ -36,3 +23,13 @@ mongoose.connect(uri, function (error) {
   console.log('mongo connected');
  }
 });
+
+express()
+  // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
+  .use(bodyParser.json()) // support json encoded bodies
+  .use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
+  .use(express.static(__dirname + '/'))
+  .listen(process.env.PORT || 5000);
+
+
+
