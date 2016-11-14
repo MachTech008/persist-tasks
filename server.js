@@ -10,13 +10,12 @@ express()
 .use(bodyParser.json())
 .use(bodyParser.urlencoded({ extended: true }))
 .use(express.static(__dirname + '/'))
+.get('/api', function (req, res) {
+  res.json(200, {msg: 'OK'});
+})
 .listen(5000, function () {
   console.log('Example app listening on port 5000!')
-})
-
-.get('/', function(req, res) {
-  res.render('index')
-})
+});
 
 var Schema = new mongoose.Schema({
     guid: String,
@@ -31,7 +30,7 @@ var Schema = new mongoose.Schema({
 
 var Tasks = mongoose.model('Tasks', Schema);
 
-mongoose.connect(process.env.MONGODB_UR, function (error) {
+mongoose.connect(process.env.MONGODB_URI, function (error) {
  if (error) {
   console.error(error);
  } else {
