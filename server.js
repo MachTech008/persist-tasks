@@ -5,17 +5,43 @@ var express  = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
+var request = require('request');
 
 dotenv.load();
 
+var Schema = new mongoose.Schema({
+    guid: String,
+    title: String,
+    username: String,
+    priority: String,
+    status: String,
+    description: String,
+    location: String,
+    beaconId: String,
+})
+
+var Tasks = mongoose.model('Tasks', Schema);
+
 mongoose.connect(process.env.MONGOLAB_URI, function (error) {
-    if (error) console.error(error);
-    else console.log('mongo connected');
+ if (error) {
+  console.error(error);
+ } else {
+  console.log('mongo connected');
+ }
 });
 
 express()
-  // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
-  .use(bodyParser.json()) // support json encoded bodies
-  .use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
-  .use(express.static(__dirname + '/'))
-  .listen(process.env.PORT || 5000);
+.use(bodyParser.json())
+.use(bodyParser.urlencoded({ extended: true }))
+
+.get('/api', function (req, res) {
+  res.json(200, {msg: 'OK'});
+})
+.get('/api/tasks', function (req, res) {
+})
+.use(express.static(__dirname + '/'))
+.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
+
+
