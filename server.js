@@ -4,21 +4,19 @@
 var express  = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var dotenv = require('dotenv');
 var request = require('request');
-
-dotenv.load();
-
-
 
 express()
 .use(bodyParser.json())
 .use(bodyParser.urlencoded({ extended: true }))
 .use(express.static(__dirname + '/'))
-.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+.listen(5000, function () {
+  console.log('Example app listening on port 5000!')
 })
 
+.get('/', function(req, res) {
+  res.render('index');
+})
 
 var Schema = new mongoose.Schema({
     guid: String,
