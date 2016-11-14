@@ -15,7 +15,7 @@ express()
 })
 
 .get('/', function(req, res) {
-  res.render('index');
+  res.render('index')
 })
 
 var Schema = new mongoose.Schema({
@@ -31,7 +31,7 @@ var Schema = new mongoose.Schema({
 
 var Tasks = mongoose.model('Tasks', Schema);
 
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+mongoose.connect(process.env.MONGODB_UR, function (error) {
  if (error) {
   console.error(error);
  } else {
