@@ -9,6 +9,17 @@ var request = require('request');
 
 dotenv.load();
 
+
+
+express()
+.use(bodyParser.json())
+.use(bodyParser.urlencoded({ extended: true }))
+.use(express.static(__dirname + '/'))
+.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
+
+
 var Schema = new mongoose.Schema({
     guid: String,
     title: String,
@@ -22,20 +33,10 @@ var Schema = new mongoose.Schema({
 
 var Tasks = mongoose.model('Tasks', Schema);
 
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+mongoose.connect('mongodb://lylyn:accenture1@ds151917.mlab.com:51917/persist-tasks', function (error) {
  if (error) {
   console.error(error);
  } else {
   console.log('mongo connected');
  }
 });
-
-express()
-.use(bodyParser.json())
-.use(bodyParser.urlencoded({ extended: true }))
-.use(express.static(__dirname + '/'))
-.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
-
-

@@ -7,9 +7,7 @@
     "dotenv": "^2.0.0",
     "express": "~3.4.7",
     "mongoose": "~4.0.6",
-    "request": "^2.78.0",
-    "todomvc-app-css": "^1.0.1",
-    "todomvc-common": "^1.0.0"
+    "request": "^2.78.0"
   },
   "engines": {
     "node": ">=0.10.25"
