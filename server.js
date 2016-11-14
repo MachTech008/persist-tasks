@@ -17,20 +17,22 @@ express()
   console.log('Example app listening on port 5000!')
 });
 
-var Schema = new mongoose.Schema({
-    guid: String,
-    title: String,
-    username: String,
-    priority: String,
-    status: String,
-    description: String,
-    location: String,
-    beaconId: String,
-})
+// var Schema = new mongoose.Schema({
+//     guid: String,
+//     title: String,
+//     username: String,
+//     priority: String,
+//     status: String,
+//     description: String,
+//     location: String,
+//     beaconId: String,
+// })
 
-var Tasks = mongoose.model('Tasks', Schema);
+// var Tasks = mongoose.model('Tasks', Schema);
 
-mongoose.connect(process.env.MONGODB_URI, function (error) {
+var uri = process.env.MONGODB_URI || 'mongodb://lylyn:accenture1@ds151917.mlab.com:51917/persist-tasks';
+
+mongoose.connect(uri, function (error) {
  if (error) {
   console.error(error);
  } else {
