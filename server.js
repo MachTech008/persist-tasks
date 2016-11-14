@@ -6,16 +6,13 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var request = require('request');
 
+
 express()
-.use(bodyParser.json())
-.use(bodyParser.urlencoded({ extended: true }))
-.use(express.static(__dirname + '/'))
-.get('/api', function (req, res) {
-  res.json(200, {msg: 'OK'});
-})
-.listen(5000, function () {
-  console.log('Example app listening on port 5000!')
-});
+  // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
+  .use(bodyParser.json()) // support json encoded bodies
+  .use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
+  .use(express.static(__dirname + '/'))
+  .listen(process.env.PORT || 5000);
 
 // var Schema = new mongoose.Schema({
 //     guid: String,
