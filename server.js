@@ -33,12 +33,6 @@ mongoose.connect(process.env.MONGOLAB_URI, function (error) {
 express()
 .use(bodyParser.json())
 .use(bodyParser.urlencoded({ extended: true }))
-
-.get('/api', function (req, res) {
-  res.json(200, {msg: 'OK'});
-})
-.get('/api/tasks', function (req, res) {
-})
 .use(express.static(__dirname + '/'))
 .listen(3000, function () {
   console.log('Example app listening on port 3000!')
