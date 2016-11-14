@@ -30,12 +30,12 @@ express()
 
 // var Tasks = mongoose.model('Tasks', Schema);
 
-var uri = process.env.MONGODB_URI || 'mongodb://lylyn:accenture1@ds151917.mlab.com:51917/persist-tasks';
+// var uri = process.env.MONGODB_URI || 'mongodb://lylyn:accenture1@ds151917.mlab.com:51917/persist-tasks';
 
-mongoose.connect(uri, function (error) {
- if (error) {
-  console.error(error);
- } else {
-  console.log('mongo connected');
- }
-});
+// mongoose.connect(uri, function (error) {
+//  if (error) {
+//   console.error(error);
+//  } else {
+//   console.log('mongo connected');
+//  }
+// });
