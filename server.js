@@ -13,7 +13,7 @@ express()
     res.json(200, {msg: 'OK'});
   })
 
-  .get('/api/getUser', function (req, res) {
+  .get('/api/getUsers', function (req, res) {
 
     request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
       body = JSON.parse(body);
@@ -95,7 +95,7 @@ express()
           
           console.log(error);
           var locations = ['101', '102', '103', '104'];
-          
+
           for (var i = 0; i < locations.length; i++ ){
             
             var update = {
