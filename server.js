@@ -14,11 +14,11 @@ express()
   })
 
   .get('/api/getUsers', function (req, res) {
-
     request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
       body = JSON.parse(body);
       if (body.indexOf('Laure Linn')) {
         console.log('user found');
+        res.send(body);
 
       } else {
         
@@ -37,11 +37,11 @@ express()
           }
         };
 
-        request(update, function (error, response, body) {
+        request(update, function (error, response, body1) {
           if (error) {
             console.log(error);
           } else {
-            res.send(body)
+            console.log('users updated');
           }
         });
       }
@@ -55,6 +55,7 @@ express()
       if (body.indexOf('DummyToken1')) {
 
         console.log('credentials found');
+        res.send(body);
 
       } else {
 
@@ -72,11 +73,11 @@ express()
           }
         };
 
-        request(update, function (error, response, body) {
+        request(update, function (error, response, body1) {
           if (error) {
             console.log(error);
           } else {
-            res.send(body);
+            res.send(body1);
           }
         })
       }
@@ -84,45 +85,47 @@ express()
   })
 
   .get('/api/getLocations' , function (req, res) {
-    request.get(baseConnectWorkerURL + 'locations', function (error, response, body) {
+    request.get(baseConnectWorkerURL + 'locations', function (error, response, body) { 
       body = JSON.parse(body);
       var rooms = [];
-
       for (var i = 0; i < body.length; i++) {
         rooms.push(body[i].name)
 
-        if(!rooms.indexOf('101') || (!rooms.indexOf('102')) || (!rooms.indexOf('103')) || (!rooms.indexOf('104'))) {
-          
-          console.log(error);
+        if((rooms.indexOf('101') || (rooms.indexOf('102')) || (rooms.indexOf('103')) || !rooms.indexOf('104'))) {
+          console.log('locations found');
+          res.send(body);
+        } else {
           var locations = ['101', '102', '103', '104'];
 
           for (var i = 0; i < locations.length; i++ ){
             
-            var update = {
-              url: baseConnectWorkerURL + 'locations',
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              },
-              json: {
-                name: locations[i]
-              }
-            };
+          var update = {
+            url: baseConnectWorkerURL + 'locations',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            json: {
+              name: locations[i]
+            }
+          };
 
-            request(update, function(error, response, body) {
-              if (error) {
-                console.log(error);
-              } else {
-                res.send(body)
-              }
-            })
-          }
-        } else {
-          console.log('locations found');
+          request(update, function(error, response, body1) {
+            if (error) {
+              console.log(error);
+            } else {
+              res.send(body1)
+            }
+          })
         }
       }
+      }
     })
+  })
+
+  .get('/api/taskTypes', function(req, res) {
+
   })
   .use(express.static(__dirname + '/'))
   .listen(process.env.PORT || 5000);
