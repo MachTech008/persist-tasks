@@ -13,41 +13,6 @@ express()
     res.json(200, {msg: 'OK'});
   })
 
-  .get('/api/getUsers', function (req, res) {
-    request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
-      body = JSON.parse(body);
-      if (body.indexOf('Laure Linn')) {
-        console.log('user found');
-        res.send(body);
-
-      } else {
-        
-        console.log('user not found');
-
-        var update = {
-          url: baseConnectWorkerURL + 'users',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          json: {
-            name: 'Laure Linn',
-            credentials: 'DummyToken1' 
-          }
-        };
-
-        request(update, function (error, response, body1) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('users updated');
-          }
-        });
-      }
-    })
-  })
-
   .get('/api/getCredentials', function (req, res) {
     request.get(baseConnectWorkerURL + 'credentials', function (error, response, body) {
       body = JSON.parse(body);
@@ -175,6 +140,40 @@ express()
           }
         });
       }  
+    })
+  })
+  .get('/api/getUsers', function (req, res) {
+    request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
+      body = JSON.parse(body);
+      if (body.indexOf('Laure Linn')) {
+        console.log('user found');
+        res.send(body);
+
+      } else {
+        
+        console.log('user not found');
+
+        var update = {
+          url: baseConnectWorkerURL + 'users',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          json: {
+            name: 'Laure Linn',
+            credentials: 'DummyToken1' 
+          }
+        };
+
+        request(update, function (error, response, body1) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('users updated');
+          }
+        });
+      }
     })
   })
   .use(express.static(__dirname + '/'))
