@@ -5,22 +5,21 @@ var fs = require('fs');
 
 var baseConnectWorkerURL = 'http://ec2-52-26-69-118.us-west-2.compute.amazonaws.com/api/v1/';
 
-express()
-  .use(bodyParser.json()) 
-  .use(bodyParser.urlencoded({ extended: true }))
+var app = express()
+  app.use(bodyParser.json()) 
+  app.use(bodyParser.urlencoded({ extended: true }))
 
-  .get('/api', function (req, res) {
+  app.get('/api', function (req, res) {
     res.json(200, {msg: 'OK'});
   })
 
-  .get('/api/getCredentials', function (req, res) {
+  app.get('/api/getCredentials', function (req, res) {
     request.get(baseConnectWorkerURL + 'credentials', function (error, response, body) {
       body = JSON.parse(body);
 
       if (body.indexOf('DummyToken1')) {
 
         console.log('credentials found');
-        res.send(body);
 
       } else {
 
@@ -29,154 +28,115 @@ express()
         var update = {
           url: baseConnectWorkerURL + 'credentials',
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
           json: {
             token: 'DummyToken1'
           }
         };
-
+        
         request(update, function (error, response, body1) {
           if (error) {
             console.log(error);
           } else {
-            res.send(body1);
+            console.log('success');
           }
         })
       }
     })
+
+    res.json(200, {msg: 'OK'});
   })
 
-  .get('/api/getLocations' , function (req, res) {
+  app.get('/api/getLocations' , function (req, res) {
     request.get(baseConnectWorkerURL + 'locations', function (error, response, body) { 
       body = JSON.parse(body);
-      var rooms = [];
       for (var i = 0; i < body.length; i++) {
-        rooms.push(body[i].name)
-
-        if(rooms.indexOf('101')) {
-          console.log('locations found');
-          res.send(body);
+        if (body[i].name === '101') {
+          console.log('room 101 found');
         } else {
          
           var update = {
             url: baseConnectWorkerURL + 'locations',
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
             json: {
-              name: locations[i]
+              name: '101'
             }
           };
 
           request(update, function(error, response, body1) {
             if (error) {
               console.log(error);
-            } else {
-              res.send(body1)
             }
           });
         }
 
-        if(rooms.indexOf('102')) {
-          console.log('locations found');
-          res.send(body);
+        if (body[i].name === '102') {
+          console.log('room 102 found');
         } else {
-         
           var update = {
             url: baseConnectWorkerURL + 'locations',
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
             json: {
               name: '102'
             }
           };
 
-          request(update, function(error, response, body2) {
+          request(update, function(error, response, body1) {
             if (error) {
               console.log(error);
-            } else {
-              res.send(body2)
             }
           });
         }
 
-        if(rooms.indexOf('103')) {
-          console.log('locations found');
-          res.send(body);
+        if (body[i].name === '103') {
+          console.log('room 103 found');
         } else {
-         
           var update = {
             url: baseConnectWorkerURL + 'locations',
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
             json: {
               name: '103'
             }
           };
 
-          request(update, function(error, response, body3) {
+          request(update, function(error, response, body1) {
             if (error) {
               console.log(error);
-            } else {
-              res.send(body3)
             }
           });
         }
 
-        if(rooms.indexOf('104')) {
-          console.log('locations found');
-          res.send(body);
+        if (body[i].name === '104') {
+          console.log('room 104 found');
         } else {
-         
           var update = {
             url: baseConnectWorkerURL + 'locations',
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
             json: {
               name: '104'
             }
           };
 
-          request(update, function(error, response, body4) {
+          request(update, function(error, response, body1) {
             if (error) {
               console.log(error);
-            } else {
-              res.send(body4)
             }
           });
         }
-
       }
     })
+
+    res.json(200, {msg: 'OK'});
   })
-  .get('/api/getTaskTypes', function(req, res) {
+  app.get('/api/getTaskTypes', function(req, res) {
     request.get(baseConnectWorkerURL + 'taskTypes', function (error, response, body) {
       body = JSON.parse(body);
       if (body.indexOf('Maintenance Request')) {
         console.log('Maintenance Request task type found');
-        res.send(body)
+
       } else {
         var update = {
           url: baseConnectWorkerURL + 'tasktypes',
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
           json: {
             title: 'Maintenance Request'
           }
@@ -193,15 +153,11 @@ express()
 
       if (body.indexOf('Housekeeping Request')) {
         console.log('Housekeeping Request task type found');
-        res.send(body)
+
       } else {
         var update1 = {
           url: baseConnectWorkerURL + 'tasktypes',
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
           json: {
             title: 'Housekeeping Request'
           }
@@ -216,25 +172,21 @@ express()
         });
       }  
     })
+    res.json(200, {msg: 'OK'});
   })
-  .get('/api/getUsers', function (req, res) {
+  app.get('/api/getUsers', function (req, res) {
     request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
       body = JSON.parse(body);
       if (body.indexOf('Laure Linn')) {
-        console.log('user found');
-        res.send(body);
+        console.log('User found');
 
       } else {
         
-        console.log('user not found');
+        console.log('User not found');
 
         var update = {
           url: baseConnectWorkerURL + 'users',
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
           json: {
             name: 'Laure Linn',
             credentials: 'DummyToken1' 
@@ -250,9 +202,11 @@ express()
         });
       }
     })
+    res.json(200, {msg: 'OK'});
   })
-  .use(express.static(__dirname + '/'))
-  .listen(process.env.PORT || 5000);
+  app.use(express.static(__dirname + '/'))
+  app.listen(process.env.PORT || 5000);
+
 
 
 
