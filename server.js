@@ -56,14 +56,11 @@ express()
       for (var i = 0; i < body.length; i++) {
         rooms.push(body[i].name)
 
-        if((rooms.indexOf('101') || (rooms.indexOf('102')) || (rooms.indexOf('103')) || !rooms.indexOf('104'))) {
+        if(rooms.indexOf('101')) {
           console.log('locations found');
           res.send(body);
         } else {
-          var locations = ['101', '102', '103', '104'];
-
-          for (var i = 0; i < locations.length; i++ ){
-            
+         
           var update = {
             url: baseConnectWorkerURL + 'locations',
             method: 'POST',
@@ -82,9 +79,87 @@ express()
             } else {
               res.send(body1)
             }
-          })
+          });
         }
-      }
+
+        if(rooms.indexOf('102')) {
+          console.log('locations found');
+          res.send(body);
+        } else {
+         
+          var update = {
+            url: baseConnectWorkerURL + 'locations',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            json: {
+              name: '102'
+            }
+          };
+
+          request(update, function(error, response, body2) {
+            if (error) {
+              console.log(error);
+            } else {
+              res.send(body2)
+            }
+          });
+        }
+
+        if(rooms.indexOf('103')) {
+          console.log('locations found');
+          res.send(body);
+        } else {
+         
+          var update = {
+            url: baseConnectWorkerURL + 'locations',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            json: {
+              name: '103'
+            }
+          };
+
+          request(update, function(error, response, body3) {
+            if (error) {
+              console.log(error);
+            } else {
+              res.send(body3)
+            }
+          });
+        }
+
+        if(rooms.indexOf('104')) {
+          console.log('locations found');
+          res.send(body);
+        } else {
+         
+          var update = {
+            url: baseConnectWorkerURL + 'locations',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            json: {
+              name: '104'
+            }
+          };
+
+          request(update, function(error, response, body4) {
+            if (error) {
+              console.log(error);
+            } else {
+              res.send(body4)
+            }
+          });
+        }
+
       }
     })
   })
