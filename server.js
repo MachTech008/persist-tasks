@@ -88,7 +88,7 @@ express()
       }
     })
   })
-  .get('/api/taskTypes', function(req, res) {
+  .get('/api/getTaskTypes', function(req, res) {
     request.get(baseConnectWorkerURL + 'taskTypes', function (error, response, body) {
       body = JSON.parse(body);
       if (body.indexOf('Maintenance Request')) {
