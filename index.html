@@ -9,6 +9,7 @@
         url: 'https://persist-tasks.herokuapp.com/api/getCredentials', 
         success: function(result) {
           console.log('success with getCredentials');
+          $("cred").text('success with get credentials')
         }, 
         error: function() {
           console.log('error with getCredentials');
@@ -21,6 +22,7 @@
         url: 'https://persist-tasks.herokuapp.com/api/getLocations', 
         success: function(result) {
           console.log('success with getLocations');
+          $("loc").text('success with get locations')
         }, 
         error: function() {
           console.log('error with getLocations');
@@ -33,6 +35,7 @@
         url: 'https://persist-tasks.herokuapp.com/api/gettasktypes', 
         success: function(result) {
           console.log('success with gettasktypes');
+          $("task").text('success with get tasks')
         }, 
         error: function() {
           console.log('error with gettasktypes');
@@ -45,6 +48,7 @@
         url: 'https://persist-tasks.herokuapp.com/api/getUsers', 
         success: function(result) {
           console.log('success with getUsers');
+          $("user").text('success with get user')
         }, 
         error: function() {
           console.log('error with getUsers');
@@ -57,6 +61,10 @@
 </head>
 <body>
 <h1>Connected Worker Tasks</h1>
+<p id="cred"></p>
+<p id="loc"></p>
+<p id="task"></p>
+<p id="user"></p>
   <p><button id="button" onclick="" value="Submit">Check Connector Worker</button></p>
 </body>
 
