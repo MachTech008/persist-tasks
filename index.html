@@ -5,7 +5,7 @@
 
   <script>
   $(document).ready(function(){
-    $("#button1").click(function(){
+    $("#button").click(function(){
       $.ajax({
         url: 'https://persist-tasks.herokuapp.com/api/getCredentials', 
         success: function(result) {
@@ -17,7 +17,7 @@
       });
     });
 
-    $("#button2").click(function(){
+    $("#button").click(function(){
       $.ajax({
         url: 'https://persist-tasks.herokuapp.com/api/getLocations', 
         success: function(result) {
@@ -29,7 +29,7 @@
       });
     });
     
-    $("#button3").click(function(){
+    $("#button").click(function(){
       $.ajax({
         url: 'https://persist-tasks.herokuapp.com/api/gettasktypes', 
         success: function(result) {
@@ -41,7 +41,7 @@
       });
     });
 
-    $("#button4").click(function(){
+    $("#button").click(function(){
       $.ajax({
         url: 'https://persist-tasks.herokuapp.com/api/getUsers', 
         success: function(result) {
@@ -58,7 +58,7 @@
 </head>
 <body>
 <h1>Connected Worker Tasks</h1>
-  <p><button id="button1" onclick="" value="Submit">Credentials</button></p>
+  <p><button id="button" onclick="" value="Submit">Credentials</button></p>
   <p><button id="button2" onclick="" value="Submit">Locations</button></p>
   <p><button id="button3" onclick="" value="Submit">Task Types</button></p>
   <p><button id="button4" onclick="" value="Submit">Users</button></p>
