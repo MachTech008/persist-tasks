@@ -1,9 +1,68 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <script src="jquery-3.1.1.min.js"></script>
+
+  <script>
+  $(document).ready(function(){
+
+    $("#button1").click(function(){
+      $.ajax({
+        url: 'https://persist-tasks.herokuapp.com/api/getCredentials', 
+        success: function(result) {
+          console.log('success with getCredentials');
+        }, 
+        error: function() {
+          console.log('error with getCredentials');
+        }
+      });
+    });
+
+    $("#button2").click(function(){
+      $.ajax({
+        url: 'https://persist-tasks.herokuapp.com/api/getLocations', 
+        success: function(result) {
+          console.log('success with getLocations');
+        }, 
+        error: function() {
+          console.log('error with getLocations');
+        }
+      });
+    });
+    
+    $("#button3").click(function(){
+      $.ajax({
+        url: 'https://persist-tasks.herokuapp.com/api/gettasktypes', 
+        success: function(result) {
+          console.log('success with gettasktypes');
+        }, 
+        error: function() {
+          console.log('error with gettasktypes');
+        }
+      });
+    });
+
+    $("#button4").click(function(){
+      $.ajax({
+        url: 'https://persist-tasks.herokuapp.com/api/getUsers', 
+        success: function(result) {
+          console.log('success with getUsers');
+        }, 
+        error: function() {
+          console.log('error with getUsers');
+        }
+      });
+    });
+
+  });
+
+  </script>
+</head>
 <body>
-
 <h1>Connected Worker Tasks</h1>
-<p></p>
-
+  <p><button id="button1" onclick="" value="Submit">Credentials</button></p>
+  <p><button id="button2" onclick="" value="Submit">Locations</button></p>
+  <p><button id="button3" onclick="" value="Submit">Task Types</button></p>
+  <p><button id="button4" onclick="" value="Submit">Users</button></p>
 </body>
 </html>
