@@ -65,6 +65,9 @@
       });
     });
 
+    $("#reset").click(function() {
+      location.reload();
+    })
   });
   </script>
 </head>
@@ -72,7 +75,7 @@
 
   <div class="container">
     <h2>Connected Worker Tasks</h2>
-    <p><button type="button" class="btn-primary" id="button" onclick="" value="Submit">Check Platform</button></p>
+    <p><button type="button" class="btn-primary" id="button" onclick="" value="Submit">Check Platform</button> <input class="btn-default" type='button' id='reset' value='reset' /> </p>
     <ul>
       <li id="cred"></li>
       <li id="loc"></li>
