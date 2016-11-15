@@ -123,9 +123,59 @@ express()
       }
     })
   })
-
   .get('/api/taskTypes', function(req, res) {
+    request.get(baseConnectWorkerURL + 'taskTypes', function (error, response, body) {
+      body = JSON.parse(body);
+      if (body.indexOf('Maintenance Request')) {
+        console.log('Maintenance Request task type found');
+        res.send(body)
+      } else {
+        var update = {
+          url: baseConnectWorkerURL + 'tasktypes',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          json: {
+            title: 'Maintenance Request'
+          }
+        };
 
+        request(update, function(error, response, body1) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Maintenance Request tasktype updated!');
+          }
+        });
+      }
+
+      if (body.indexOf('Housekeeping Request')) {
+        console.log('Housekeeping Request task type found');
+        res.send(body)
+      } else {
+        var update1 = {
+          url: baseConnectWorkerURL + 'tasktypes',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          json: {
+            title: 'Housekeeping Request'
+          }
+        };
+
+        request(update1, function(error, response, body1) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Housekeeping tasktype updated!');
+          }
+        });
+      }  
+    })
   })
   .use(express.static(__dirname + '/'))
   .listen(process.env.PORT || 5000);
