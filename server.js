@@ -16,15 +16,11 @@ var app = express()
   app.get('/api/getCredentials', function (req, res) {
     request.get(baseConnectWorkerURL + 'credentials', function (error, response, body) {
       body = JSON.parse(body);
-
-      if (body.indexOf('DummyToken1')) {
-
+      for(var i = 0; i < body.length; i++) {
+        if (body[i].token === 'DummyToken1') {
         console.log('credentials found');
-
-      } else {
-
+        } else {
         console.log('credentials not found');
-
         var update = {
           url: baseConnectWorkerURL + 'credentials',
           method: 'POST',
@@ -41,8 +37,8 @@ var app = express()
           }
         })
       }
-    })
-
+    }
+  })
     res.json(200, {msg: 'OK'});
   })
 
@@ -130,76 +126,87 @@ var app = express()
   app.get('/api/getTaskTypes', function(req, res) {
     request.get(baseConnectWorkerURL + 'taskTypes', function (error, response, body) {
       body = JSON.parse(body);
-      if (body.indexOf('Maintenance Request')) {
-        console.log('Maintenance Request task type found');
+      for (var i = 0; i < body.length; i++) {
+        if (body[i].title === 'Housekeeping Request') {
+            console.log('Housekeeping Request task type found');
+            res.json(200, {msg: 'OK'});
+        } else {
+          console.log('not found');
+          var update1 = {
+            url: baseConnectWorkerURL + 'tasktypes',
+            method: 'POST',
+            json: {
+              title: 'Housekeeping Request',
+            }
+          };
 
-      } else {
-        var update = {
-          url: baseConnectWorkerURL + 'tasktypes',
-          method: 'POST',
-          json: {
-            title: 'Maintenance Request'
-          }
-        };
+          var update = {
+            url: baseConnectWorkerURL + 'taskTypes',
+            method: 'POST',
+            json: {
+              title: 'Housekeeping Request'
+            }
+          };
 
-        request(update, function(error, response, body1) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Maintenance Request tasktype updated!');
-          }
-        });
+          request(update, function(error, response, body1) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Housekeeping tasktype updated!');
+            }
+          });
+        }
+
+        if (body[i].title === 'Maintenance Request') {
+          console.log('Maintenance Request task type found');
+              res.json(200, {msg: 'OK'});
+        } else {
+          var update1 = {
+            url: baseConnectWorkerURL + 'tasktypes',
+            method: 'POST',
+            json: {
+              title: 'Maintenance Request'
+            }
+          };
+
+          request(update1, function(error, response, body1) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Maintenance Request tasktype updated!');
+            }
+          });
+        }  
       }
-
-      if (body.indexOf('Housekeeping Request')) {
-        console.log('Housekeeping Request task type found');
-
-      } else {
-        var update1 = {
-          url: baseConnectWorkerURL + 'tasktypes',
-          method: 'POST',
-          json: {
-            title: 'Housekeeping Request'
-          }
-        };
-
-        request(update1, function(error, response, body1) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Housekeeping tasktype updated!');
-          }
-        });
-      }  
     })
-    res.json(200, {msg: 'OK'});
+
   })
   app.get('/api/getUsers', function (req, res) {
     request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
       body = JSON.parse(body);
-      if (body.indexOf('Laure Linn')) {
-        console.log('User found');
+      for(var i = 0; i < body.length; i++) {
+        if (body[i].name === 'Laure Linn') {
+          console.log('User found');
 
-      } else {
-        
-        console.log('User not found');
+        } else {
+          console.log('User not found');
+          var update = {
+            url: baseConnectWorkerURL + 'users',
+            method: 'POST',
+            json: {
+              name: 'Laure Linn',
+              credentials: 'DummyToken1' 
+            }
+          };
 
-        var update = {
-          url: baseConnectWorkerURL + 'users',
-          method: 'POST',
-          json: {
-            name: 'Laure Linn',
-            credentials: 'DummyToken1' 
-          }
-        };
-
-        request(update, function (error, response, body1) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('users updated');
-          }
-        });
+          request(update, function (error, response, body1) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('users updated');
+            }
+          });
+        }
       }
     })
     res.json(200, {msg: 'OK'});
