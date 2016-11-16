@@ -179,7 +179,7 @@ var app = express()
         }  
       }
     })
-
+    res.json(200, {msg: 'OK'});
   })
   app.get('/api/getUsers', function (req, res) {
     request.get(baseConnectWorkerURL + 'users', function (error, response, body) {
